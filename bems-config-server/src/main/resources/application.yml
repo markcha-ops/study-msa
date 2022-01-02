@@ -1,0 +1,25 @@
+cloud:
+  aws:
+    credentials:
+      access-key: AKIASHC62AMOD3I6SCGM
+      secret-key: 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
+
+spring:
+  application:
+    name: bems-config-server
+  profiles:
+    active: awss3
+  cloud:
+    config:
+      server:
+        awss3:
+          region: ap-northeast-2
+          bucket: config-respository
+          order: 1
+#        git:
+#          uri: https://github.com/markcha-ops/bems-config-repo.git
+
+
+
+server:
+  port: 8888

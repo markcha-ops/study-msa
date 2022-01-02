@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="currency-conversion-service" />
+        <module name="eureka-naming-server" />
+        <module name="web-access" />
+        <module name="bems-config-server" />
+        <module name="device-manager" />
+        <module name="api-gateway" />
+        <module name="currency-exchange-service" />
+        <module name="limits-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api-gateway" target="11" />
+      <module name="bems-config-server" target="11" />
+      <module name="currency-conversion-service" target="11" />
+      <module name="currency-exchange-service" target="11" />
+      <module name="device-manager" target="11" />
+      <module name="eureka-naming-server" target="11" />
+      <module name="limits-service" target="11" />
+      <module name="web-access" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway" options="-parameters" />
+      <module name="bems-config-server" options="-parameters" />
+      <module name="currency-conversion-service" options="-parameters" />
+      <module name="currency-exchange-service" options="-parameters" />
+      <module name="device-manager" options="-parameters" />
+      <module name="eureka-naming-server" options="-parameters" />
+      <module name="limits-service" options="-parameters" />
+      <module name="web-access" options="-parameters" />
+    </option>
+  </component>
+</project>

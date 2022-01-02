@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: currency-conversion-service
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          jwk-set-uri: https://auth.markch.shop/auth/realms/main/protocol/openid-connect/certs
+server:
+  port: 8100
+
+#currency-exchange-service:
+#  ribbon:
+#    listOfServers:
+#      - currency-exchange-service:8000
+#    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
+#feign:
+#  hystrix:
+#    enabled: true
+#ribbon:
+#  ConnectTimeout: 120000
+#  ReadTimeout: 120000
+#  eureka:
+#    enabled: true
+#feign.client.config.default.connectTimeout: 160000000
+#feign.client.config.default.readTimeout: 160000000
+#api:
+#  ribbon:
+#    eureka:
+#      enabled: true
+#      client:
+#        defaultZone: http://localhost:8761/eureka
+#    ServerListRefreshInterval: 15000
+
+
+# zuul
+zuul:
+  prefix: /api
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
