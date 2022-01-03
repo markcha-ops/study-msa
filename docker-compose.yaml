@@ -1,0 +1,54 @@
+version: '3'
+
+volumes:
+  mysql_data:
+      driver: local
+
+services:
+  mariadb:
+    image: mariadb
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: vetec3721
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: password
+    # Copy-pasted from https://github.com/docker-library/mariadb/issues/94
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+    ports:
+      - 3721:3306
+  keycloak:
+    build:
+      dockerfile: Dockerfile
+      context: ./keycloak
+    container_name: app_keycloak
+    environment:
+#      DB_ADDR: 112.216.32.5
+#      DB_PORT: 3721
+#      DB_DATABASE: keycloak
+#      DB_USER: root
+#      DB_PASSWORD: vetec3721
+      DB_VENDOR: mariadb
+      DB_ADDR: mariadb
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: password
+      KEYCLOAK_USER: vetec
+      KEYCLOAK_PASSWORD: vetec3721
+      JGROUPS_DISCOVERY_PROTOCOL: JDBC_PING
+      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the MySQL JDBC driver documentation in order to use it.
+      #JDBC_PARAMS: "connectTimeout=30000"
+    command:
+      - "-Dkeycloak.profile.feature.upload_scripts=enabled"
+      - "-Dkeycloak.migration.action=import"
+      - "-Dkeycloak.migration.provider=dir"
+      - "-Dkeycloak.migration.dir=/opt/jboss/keycloak/import"
+      - "-Dkeycloak.migration.strategy=OVERWRITE_EXISTING"
+    volumes:
+      - "./keycloak/setting:/opt/jboss/keycloak/import"
+    ports:
+      - 9999:8080
+    depends_on:
+      - mariadb
