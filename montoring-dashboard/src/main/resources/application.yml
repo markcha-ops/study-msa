@@ -1,18 +1,16 @@
 spring:
   application:
-    name: currency-conversion-service
+    name: monitoring-dashboard
   security:
     oauth2:
       resourceserver:
         jwt:
           jwk-set-uri: https://auth.markch.shop/auth/realms/main/protocol/openid-connect/certs
 server:
-  port: 8100
+  port: 8050
 
 
 # zuul
-zuul:
-  prefix: /api
 eureka:
   client:
     serviceUrl:

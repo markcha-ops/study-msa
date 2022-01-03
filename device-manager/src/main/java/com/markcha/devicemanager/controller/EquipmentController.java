@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.markcha.devicemanager.domain.EnergyPurpose;
-import com.markcha.devicemanager.domain.EquipmentMgmt;
 import com.markcha.devicemanager.dto.EnergyPurposeDto;
 import com.markcha.devicemanager.dto.EquipmentMgmtDto;
 import com.markcha.devicemanager.dto.EquipmentMgmtInputDto;
@@ -12,27 +11,26 @@ import com.markcha.devicemanager.exception.TestException;
 import com.markcha.devicemanager.service.impl.EnergyPurposeServiceImpl;
 import com.markcha.devicemanager.service.impl.EquipmentMgmtServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
-@Slf4j
 @RestController
-@RequestMapping("/api")
-public class EnergyPurposeController {
+@RequestMapping("")
+public class EquipmentController {
 
+    private Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final EnergyPurposeServiceImpl energyPurposeServiceImpl;
     private final EquipmentMgmtServiceImpl equipmentMgmtService;
 
-    public EnergyPurposeController(EnergyPurposeServiceImpl energyPurposeServiceImpl, EquipmentMgmtServiceImpl equipmentMgmtService) {
+    public EquipmentController(EnergyPurposeServiceImpl energyPurposeServiceImpl, EquipmentMgmtServiceImpl equipmentMgmtService) {
         this.energyPurposeServiceImpl = energyPurposeServiceImpl;
         this.equipmentMgmtService = equipmentMgmtService;
     }
@@ -51,6 +49,7 @@ public class EnergyPurposeController {
 
     @GetMapping("/equip/one")
     public MappingJacksonValue status3() {
+//        throw new AuthException("ef");
         EquipmentMgmtDto equipmentMgmtDto = this.equipmentMgmtService.getEquipmentMgmtById(2);
 
         SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter
@@ -60,6 +59,12 @@ public class EnergyPurposeController {
         MappingJacksonValue mapping = new MappingJacksonValue(equipmentMgmtDto);
         mapping.setFilters(filters);
         return mapping;
+    }
+
+    @PostMapping("/equipment")
+    public ResponseEntity<String> create(@RequestBody EquipmentMgmtInputDto equipmentMgmtInputDto) {
+        log.info(equipmentMgmtInputDto.toString());
+        return ResponseEntity.ok("User is vld");
     }
 
     @PostMapping("/equip")

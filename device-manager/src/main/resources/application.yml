@@ -1,7 +1,14 @@
 
 server:
-  port: 8081
+  port: 8011
 spring:
+  application:
+    name: device-manager
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:9999/auth/realms/vetec/protocol/openid-connect/certs
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://112.216.32.5:3721/bom-bems?serverTimezone=UTC&useUnicode=yes&characterEncoding=UTF-8
